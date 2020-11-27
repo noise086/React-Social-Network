@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
-import Header from './components/header';
-import Nav from './components/nav-bar';
-import Profile from './components/profile';
+import Header from './components/header/header';
+import Nav from './components/navBar/navBar';
+import Profile from './components/profile/profile';
 
 
 function App() {
   	return (
-		<div className='app-wrapper'>
+		<div className='appWrapper'>
 			<Header />
 			<Nav />
 			<Profile />

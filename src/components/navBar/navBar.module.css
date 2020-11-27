@@ -1,0 +1,14 @@
+.nav {
+    grid-area: n;
+    background-color: rgb(75, 75, 255);
+}
+
+.item {
+    text-align: center;
+    margin: 10px;
+
+}
+.item a {
+    color: white;
+    text-decoration: none;
+}

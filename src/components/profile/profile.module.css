@@ -1,0 +1,8 @@
+.content {
+    grid-area: c;
+    background-color: pink;
+}
+
+.content img {
+    max-height: 300px;
+}
