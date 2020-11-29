@@ -1,0 +1,12 @@
+.profileInfo {
+    display: flex;
+    align-items: center;
+}
+.avatar img {
+    width: 100px;
+}
+
+.description {
+    margin-left: 10px;
+}
+

@@ -1,0 +1,15 @@
+.item {
+    display: flex;
+    align-items: center;
+    color: black;
+    margin: 20px;
+}
+
+.item img {
+    border-radius: 50%;
+    width: 50px;
+}
+
+.description {
+    margin-left: 10px;
+}

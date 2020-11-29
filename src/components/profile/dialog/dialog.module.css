@@ -1,0 +1,50 @@
+.dialogsWrapper {
+    display: grid;
+    grid-template-rows: 50px 1fr;
+    grid-template-columns: 2fr 10fr;
+
+    grid-template-areas: 
+    "a a"
+    "b c";
+    padding: 20px;
+
+    background: white;
+}
+
+.dialogsHeader {
+    font-size: 26px;
+}
+
+.dialogs {
+    grid-area: b;
+}
+.dialogItem {
+    display: block;
+    text-decoration: none;
+    margin: 20px 0;
+    padding: 10px 5px;
+    text-align: center;
+    border: darkred solid 1px;
+    border-radius: 8px;
+    color: darkred;
+    cursor: pointer;
+}
+.active {
+    color: white;
+    background: darkred;
+}
+
+.messages {
+    grid-area: c;
+    padding: 0 50px;
+}
+.message {
+    width: 40%;
+    margin: 20px 0;
+    padding: 10px 5px;
+    text-align: center;
+    border: lightslategrey solid 1px;
+    border-radius: 8px;
+    color: white;
+    background: #4b4bff;
+}

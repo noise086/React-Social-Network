@@ -1,28 +1,17 @@
 import React from 'react';
+import MyPosts from './myPosts/myPosts';
 import s from './profile.module.css';
+import ProfileInfo from './profileInfo/profileInfo';
 
 const Profile = () => {
     return (
         <div className={s.content}>
-				<img src='https://klike.net/uploads/posts/2019-06/1561528146_5.jpg' alt='pic' />
-				<div>
-                    <div>
-                        ava + description
-                    </div>
-                    <div>
-                        my posts
-                    </div>
-                    <div>
-                        new post
-                    </div>
-                    <div>
-                        post 1
-                    </div>
-                    <div>
-                        post 2
-                    </div>
-			    </div>
+            <div className={s.profileImg}>
+                <img src='https://img-fotki.yandex.ru/get/4700/202027913.2/0_b7e42_26e669d8_orig.jpg' alt='pic' />
             </div>
+            <ProfileInfo />
+            <MyPosts />
+        </div>
     )
 }
 
