@@ -5,14 +5,14 @@ import ProfileInfo from './profileInfo/profileInfo';
 
 
 
-const Profile = ({postsData}) => {
+const Profile = ({posts}) => {
     return (
         <div className={s.content}>
             <div className={s.profileImg}>
                 <img src='https://img-fotki.yandex.ru/get/4700/202027913.2/0_b7e42_26e669d8_orig.jpg' alt='pic' />
             </div>
             <ProfileInfo />
-            <MyPosts postsData={postsData}/>
+            <MyPosts posts={posts} />
         </div>
     )
 }

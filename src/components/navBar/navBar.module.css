@@ -1,7 +1,7 @@
 .nav {
     grid-area: n;
     background-color: rgb(75, 75, 255);
-    padding-top: 40px;
+    padding: 40px 5px;
 }
 
 .item {
@@ -16,4 +16,23 @@
 
 .item a.active {
     color: gold;
+}
+
+.friends {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 5px;
+}
+
+.friend {
+    color: white;
+    text-align: center;
+    font-weight: 300;
+    font-size: 20px;
+}img {
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 100%;
+
 }

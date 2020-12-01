@@ -5,11 +5,9 @@ import s from './myPosts.module.css';
 
 
 
-const MyPosts = ({postsData}) => {
+const MyPosts = ({posts}) => {
 
-    const postsElements = postsData.map(post => {
-        return <Post message={post.message} likescount={post.likescount} />
-    })
+    const postsElements = posts.map(p => <Post message={p.message} likescount={p.likescount} />)
     
     return (
         <div className={s.wrapper}>

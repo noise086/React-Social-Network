@@ -7,7 +7,7 @@
     "a a"
     "b c";
     padding: 20px;
-
+    place-items: center;
     background: white;
 }
 
@@ -17,12 +17,13 @@
 
 .dialogs {
     grid-area: b;
+    width: 100%;
 }
 .dialogItem {
     display: block;
     text-decoration: none;
     margin: 20px 0;
-    padding: 10px 5px;
+    padding: 5px 5px;
     text-align: center;
     border: darkred solid 1px;
     border-radius: 8px;
@@ -37,14 +38,47 @@
 .messages {
     grid-area: c;
     padding: 0 50px;
+    width: 50%;
 }
 .message {
-    width: 40%;
-    margin: 20px 0;
-    padding: 10px 5px;
+    display: block;
+    width: fit-content;
+    margin: 10px 0;
+    margin-right: 30px;
+    padding: 10px 30px;
     text-align: center;
     border: lightslategrey solid 1px;
     border-radius: 8px;
     color: white;
     background: #4b4bff;
+}
+.myMessage {
+    margin-left: auto;
+    border: #4b4bff solid 1px;
+    color: black;
+    background: white;
+}
+.textareaWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+}
+.textarea {
+    margin-left: auto;
+    border-radius: 5px;
+    width: 50%;
+    height: 50px;
+    border: #272796 solid 1px;
+
+}
+.button {
+    display: block;
+    margin-top: 10px;
+    margin-left: auto;
+    padding: 5px 10px;
+    color: #272796;
+    border: #272796 solid 1px;
+    border-radius: 5px;
+}:focus{
+    outline: none;
 }

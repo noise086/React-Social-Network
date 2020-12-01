@@ -2,7 +2,15 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './navBar.module.css';
 
-const Nav = () => {
+const Nav = ({friends}) => {
+
+	const friend = friends.map( f => {
+		return <div className={s.friend} > 
+					{f.name}
+					<img src={f.avatar} alt="avatar" />
+			   </div>
+	})
+
     return (
 		<nav className={s.nav}>
 			<div className={s.item}>
@@ -20,7 +28,11 @@ const Nav = () => {
 			<div className={s.item}>
 				<a href="#">Settings</a>
 			</div>
+			<div className={s.friends}>
+				{friend}
+			</div>
 		</nav>
+
     )
 }
 

@@ -5,9 +5,16 @@ import Message from "./message/message";
 
 
 
-const Dialog = ({messagesData, dialogsData}) => {
-    const dialogElements = dialogsData.map(elem => <DialogItem name={elem.name} id={elem.id} />)
-    const messageElements = messagesData.map(m => <Message message={m.message} />)
+const Dialog = ({messages, dialogs}) => {
+    const dialogElements = dialogs.map(d => <DialogItem name={d.name} id={d.id}  />)
+
+    const messageElements = messages.map(m => {
+        if (m.myMessage) {
+            return <Message message={m.message} style={`${s.message} ${s.myMessage}`} />
+        } else {
+            return <Message message={m.message} style={`${s.message}`} />
+        }
+    })
     return (
         <div className={s.dialogsWrapper}>
             <div className={s.dialogsHeader}>Dialogs</div>
@@ -16,8 +23,11 @@ const Dialog = ({messagesData, dialogsData}) => {
             </div>
             <div className={s.messages}>
                 {messageElements}
+                <div className={s.textareaWrapper}>
+                    <textarea className={s.textarea}></textarea>
+                    <button className={s.button}>sand</button>
+                </div>
             </div>
-
         </div>
     )
 }
