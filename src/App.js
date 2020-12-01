@@ -7,16 +7,16 @@ import Dialog from './components/profile/dialog/dialog';
 import Profile from './components/profile/profile';
 
 
-function App() {
+function App({messagesData, dialogsData, postsData}) {
 	return (
 		<BrowserRouter>
 			<div className='appWrapper'>
 				<Header />
 				<Nav />
 				<div className="appWrapperContent">
-					<Route path="/profile" component={Profile} >
+					<Route path="/profile" render={ () => <Profile postsData={postsData} />} >
 					</Route>
-					<Route path="/dialog" component={Dialog} >
+					<Route path="/dialog" render={() => <Dialog messagesData={messagesData} dialogsData={dialogsData} />} >
 					</Route>
 				</div>
 
