@@ -7,16 +7,27 @@ import Dialog from './components/profile/dialog/dialog';
 import Profile from './components/profile/profile';
 
 
-function App({messages, dialogs, posts, friends}) {
+function App({store, state}) {
+	
 	return (
 		<BrowserRouter>
 			<div className='appWrapper'>
 				<Header />
-				<Nav friends={friends} />
+				<Nav friends={state.sideBar.friends} />
 				<div className="appWrapperContent">
-					<Route path="/profile" render={() => <Profile posts={posts} />} >
+					<Route 
+						path="/profile" 
+						render={() => <Profile 
+							state={state}
+							addPost={store.addPost.bind(store)}
+							onPostChange={store.onPostChange.bind(store)} />} >
 					</Route>
-					<Route path="/dialog" render={() => <Dialog messages={messages} dialogs={dialogs} />} >
+					<Route 
+						path="/dialog" 
+						render={() => <Dialog
+							state={state}
+							onMessageChange={store.onMessageChange.bind(store)}
+							addMessage={store.addMessage.bind(store)} />} >
 					</Route>
 				</div>
 
