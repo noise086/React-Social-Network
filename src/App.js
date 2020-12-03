@@ -19,15 +19,13 @@ function App({store, state}) {
 						path="/profile" 
 						render={() => <Profile 
 							state={state}
-							addPost={store.addPost.bind(store)}
-							onPostChange={store.onPostChange.bind(store)} />} >
+							dispatch={store.dispatch.bind(store)} />} >
 					</Route>
 					<Route 
 						path="/dialog" 
 						render={() => <Dialog
 							state={state}
-							onMessageChange={store.onMessageChange.bind(store)}
-							addMessage={store.addMessage.bind(store)} />} >
+							dispatch={store.dispatch.bind(store)} />} >
 					</Route>
 				</div>
 

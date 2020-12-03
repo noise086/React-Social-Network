@@ -34,33 +34,32 @@ let store = {
             ]
         },
         newPostText: '',
-        newMessageText: 'hey'
+        newMessageText: 'type message'
     },
-    addPost() {
-        let newPost = {
-            id: 5,
-            message: this._state.newPostText,
-            likescount: 0
-        }
-        this._state.profilePage.posts.push(newPost);
-        this.renderedEntiresTree();
-    },
-    onPostChange(text) {
-        this._state.newPostText = text;
-        this.renderedEntiresTree();
-    },
-    addMessage() {
-        let newMessage = {
-            myMessage: true,
-            message: this._state.newMessageText
-        }
-        this._state.dialogsPage.messages.push(newMessage);
-        this.renderedEntiresTree();
-    },
-    onMessageChange(text) {
-        this._state.newMessageText = text;
-        this.renderedEntiresTree();
-    },
+    // addPost() {
+    //     let newPost = {
+    //         id: 5,
+    //         message: this._state.newPostText,
+    //         likescount: 0
+    //     }
+    //     this._state.profilePage.posts.push(newPost);
+    //     this.renderedEntiresTree();
+    // },
+    // onPostChange(text) {
+    //     this._state.newPostText = text;
+    //     this.renderedEntiresTree();
+    // },
+    // addMessage() {
+    //     let newMessage = {
+    //         myMessage: true,
+    //         message: this._state.newMessageText
+    //     }
+    //     this._state.dialogsPage.messages.push(newMessage);
+    //     this.renderedEntiresTree();
+    // },
+    // onMessageChange(text) {
+        
+    // },
     getState () {
         return this._state
     },
@@ -69,7 +68,31 @@ let store = {
     },
     renderedEntiresTree() {
         console.log('state changed')
-    }
+    },
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            let newPost = {
+                id: 5,
+                message: this._state.newPostText,
+                likescount: 0
+            }
+            this._state.profilePage.posts.push(newPost);
+            this.renderedEntiresTree();
+        } else if (action.type === 'ON-POST-CHANGE') {
+            this._state.newPostText = action.text;
+            this.renderedEntiresTree();
+        } else if (action.type === 'ADD-MESSAGE') {
+            let newMessage = {
+                myMessage: true,
+                message: this._state.newMessageText
+            }
+            this._state.dialogsPage.messages.push(newMessage);
+            this.renderedEntiresTree();
+        } else if (action.type === 'ON-MESSAGE-CHANGE') {
+            this._state.newMessageText = action.text;
+            this.renderedEntiresTree();
+        }
+    }    
 }
 
 

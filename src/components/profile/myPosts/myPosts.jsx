@@ -5,19 +5,19 @@ import s from './myPosts.module.css';
 
 
 
-const MyPosts = (props) => {
-    const postsElements = props.state.profilePage.posts.map(p => <Post message={p.message} likescount={p.likescount} />);
+const MyPosts = ({state, dispatch}) => {
+    const postsElements = state.profilePage.posts.map(p => <Post message={p.message} likescount={p.likescount} />);
 
     let newPostElement = React.createRef()
 
     const addPosts = () => {
-        props.addPost();
-        props.onPostChange('');
+        dispatch({ type: 'ADD-POST'});
+        dispatch({ type: 'ON-POST-CHANGE', text: ''});
     }
 
     const onPostChange = () => {
         let text = newPostElement.current.value;
-        props.onPostChange(text)
+        dispatch( { type: 'ON-POST-CHANGE', text: text} )
     }
     return (
         <div className={s.wrapper}>
@@ -26,7 +26,7 @@ const MyPosts = (props) => {
                 <div className={s.input}>
                     <input ref={newPostElement} 
                            type='text' 
-                           value={props.state.newPostText}
+                           value={state.newPostText}
                            placeholder='Как дела?' 
                            className={s.inputPost} 
                            onChange={onPostChange}

@@ -5,10 +5,10 @@ import Message from "./message/message";
 
 
 
-const Dialog = (props) => {
-    const dialogElements = props.state.dialogsPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}  />)
+const Dialog = ({state, dispatch}) => {
+    const dialogElements = state.dialogsPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}  />)
 
-    const messageElements = props.state.dialogsPage.messages.map(m => {
+    const messageElements = state.dialogsPage.messages.map(m => {
         if (m.myMessage) {
             return <Message message={m.message} style={`${s.message} ${s.myMessage}`} />
         } else {
@@ -23,12 +23,12 @@ const Dialog = (props) => {
 
     const onMessageChange = () => {
         let text = newMessageElement.current.value;
-        props.onMessageChange(text);
+        dispatch({type: 'ON-MESSAGE-CHANGE', text: text});
     }
 
     const addMessage = () => {
-        props.addMessage();
-        props.onMessageChange('');
+        dispatch({type: 'ADD-MESSAGE'});
+        dispatch( {type: 'ON-MESSAGE-CHANGE', text: ''});
     }
 
     return (
@@ -41,7 +41,7 @@ const Dialog = (props) => {
                 {messageElements}
                 <div className={s.textareaWrapper}>
                     <input  type='text'
-                            value={props.newMessageText}
+                            value={state.newMessageText}
                             ref={newMessageElement} 
                             className={s.textarea} 
                             onChange={onMessageChange} 
