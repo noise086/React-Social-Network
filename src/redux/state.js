@@ -1,3 +1,8 @@
+const ADD_POST = 'ADD-POST';
+const ON_POST_CHANGE = 'ON-POST-CHANGE';
+const ADD_MESSAGE = 'ADD-MESSAGE';
+const ON_MESSAGE_CHANGE = 'ON-MESSAGE-CHANGE';
+
 let store = {
     _state: {
         profilePage:{ 
@@ -36,30 +41,6 @@ let store = {
         newPostText: '',
         newMessageText: 'type message'
     },
-    // addPost() {
-    //     let newPost = {
-    //         id: 5,
-    //         message: this._state.newPostText,
-    //         likescount: 0
-    //     }
-    //     this._state.profilePage.posts.push(newPost);
-    //     this.renderedEntiresTree();
-    // },
-    // onPostChange(text) {
-    //     this._state.newPostText = text;
-    //     this.renderedEntiresTree();
-    // },
-    // addMessage() {
-    //     let newMessage = {
-    //         myMessage: true,
-    //         message: this._state.newMessageText
-    //     }
-    //     this._state.dialogsPage.messages.push(newMessage);
-    //     this.renderedEntiresTree();
-    // },
-    // onMessageChange(text) {
-        
-    // },
     getState () {
         return this._state
     },
@@ -92,9 +73,13 @@ let store = {
             this._state.newMessageText = action.text;
             this.renderedEntiresTree();
         }
-    }    
+    },
 }
 
+export const addPostActionCreator = () => ({type: ADD_POST})
+export const onPostChangeActionCreator = (text) => ({type: ON_POST_CHANGE, text: text})
+export const addMessageActionCreator = () => ({type: ADD_MESSAGE})
+export const onMessageChangeActionCreator = (text) => ({type: ON_MESSAGE_CHANGE, text: text})
 
 window.store = store;
 export default store;

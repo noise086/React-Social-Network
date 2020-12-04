@@ -1,6 +1,8 @@
 import React from 'react';
-import Post from './post/post'
+import { addPostActionCreator, onPostChangeActionCreator } from '../../../redux/state';
 import s from './myPosts.module.css';
+import Post from './post/post';
+
 
 
 
@@ -11,13 +13,13 @@ const MyPosts = ({state, dispatch}) => {
     let newPostElement = React.createRef()
 
     const addPosts = () => {
-        dispatch({ type: 'ADD-POST'});
-        dispatch({ type: 'ON-POST-CHANGE', text: ''});
+        dispatch(addPostActionCreator());
+        dispatch(onPostChangeActionCreator(''));
     }
 
     const onPostChange = () => {
         let text = newPostElement.current.value;
-        dispatch( { type: 'ON-POST-CHANGE', text: text} )
+        dispatch(onPostChangeActionCreator(text))
     }
     return (
         <div className={s.wrapper}>
