@@ -1,5 +1,5 @@
 import React from 'react';
-import { addMessageActionCreator, onMessageChangeActionCreator } from '../../../redux/state';
+import { addMessageActionCreator, onMessageChangeActionCreator } from '../../../redux/dialogsReducer';
 import s from './dialog.module.css';
 import DialogItem from './dialogItem/dialogItem';
 import Message from "./message/message";
@@ -17,13 +17,8 @@ const Dialog = ({state, dispatch}) => {
         }
     })
 
-
-    let newMessageElement = React.createRef()
-
-    // console.log(newPostElement)
-
-    const onMessageChange = () => {
-        let text = newMessageElement.current.value;
+    const onMessageChange = (e) => {
+        let text = e.target.value;
         dispatch(onMessageChangeActionCreator(text));
     }
 
@@ -41,12 +36,11 @@ const Dialog = ({state, dispatch}) => {
             <div className={s.messages}>
                 {messageElements}
                 <div className={s.textareaWrapper}>
-                    <input  type='text'
-                            value={state.newMessageText}
-                            ref={newMessageElement} 
+                    <textarea  type='text'
+                            value={state.dialogsPage.newMessageText}
                             className={s.textarea} 
                             onChange={onMessageChange} 
-                    ></input>
+                    ></textarea>
                     <button 
                         className={s.button}
                         onClick={addMessage} >sand</button>

@@ -1,7 +1,6 @@
-const ADD_POST = 'ADD-POST';
-const ON_POST_CHANGE = 'ON-POST-CHANGE';
-const ADD_MESSAGE = 'ADD-MESSAGE';
-const ON_MESSAGE_CHANGE = 'ON-MESSAGE-CHANGE';
+import dialogsReducer from './dialogsReducer';
+import profileReducer from './profileReducer';
+import sideBarReducer from './sideBarReducer';
 
 let store = {
     _state: {
@@ -11,7 +10,8 @@ let store = {
                 { id: 2, message: 'Its my third post', likescount: 10 },
                 { id: 3, message: 'Its my second post', likescount: 13 },
                 { id: 4, message: 'Its my first post', likescount: 23 },
-            ]
+            ],
+        newMessageText: 'type message'
         },
         dialogsPage: {
             dialogs: [
@@ -29,7 +29,8 @@ let store = {
                 { myMessage: true, message: "Fuck you" },
                 { myMessage: false, message: "Go drink" },
                 { myMessage: true, message: "Ok" },
-            ]
+            ],
+        newPostText: ''
         },
         sideBar: {
             friends: [
@@ -38,8 +39,6 @@ let store = {
                 {name: 'Sasha', avatar: 'https://avatars.mds.yandex.net/get-zen_doc/3683451/pub_5efb3ff066fe1d5006536937_5efb4cb267cc5e13be1840cc/scale_1200'}
             ]
         },
-        newPostText: '',
-        newMessageText: 'type message'
     },
     getState () {
         return this._state
@@ -47,39 +46,17 @@ let store = {
     subscribe(observer) {
         this.renderedEntiresTree = observer
     },
-    renderedEntiresTree() {
+    _callSubscriber() {
         console.log('state changed')
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            let newPost = {
-                id: 5,
-                message: this._state.newPostText,
-                likescount: 0
-            }
-            this._state.profilePage.posts.push(newPost);
-            this.renderedEntiresTree();
-        } else if (action.type === 'ON-POST-CHANGE') {
-            this._state.newPostText = action.text;
-            this.renderedEntiresTree();
-        } else if (action.type === 'ADD-MESSAGE') {
-            let newMessage = {
-                myMessage: true,
-                message: this._state.newMessageText
-            }
-            this._state.dialogsPage.messages.push(newMessage);
-            this.renderedEntiresTree();
-        } else if (action.type === 'ON-MESSAGE-CHANGE') {
-            this._state.newMessageText = action.text;
-            this.renderedEntiresTree();
-        }
+        profileReducer(this._state.profilePage, action);
+        dialogsReducer(this._state.dialogsPage, action);
+        sideBarReducer(this._state.sideBarPage, action);
+
+        this._callSubscriber();
     },
 }
-
-export const addPostActionCreator = () => ({type: ADD_POST})
-export const onPostChangeActionCreator = (text) => ({type: ON_POST_CHANGE, text: text})
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE})
-export const onMessageChangeActionCreator = (text) => ({type: ON_MESSAGE_CHANGE, text: text})
 
 window.store = store;
 export default store;
