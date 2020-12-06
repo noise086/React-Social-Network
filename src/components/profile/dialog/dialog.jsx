@@ -1,15 +1,14 @@
 import React from 'react';
-import { addMessageActionCreator, onMessageChangeActionCreator } from '../../../redux/dialogsReducer';
 import s from './dialog.module.css';
 import DialogItem from './dialogItem/dialogItem';
 import Message from "./message/message";
 
 
 
-const Dialog = ({state, dispatch}) => {
-    const dialogElements = state.dialogsPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}  />)
+const Dialog = (props) => {
+    const dialogElements = props.dialogsPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}  />)
 
-    const messageElements = state.dialogsPage.messages.map(m => {
+    const messageElements = props.dialogsPage.messages.map(m => {
         if (m.myMessage) {
             return <Message message={m.message} style={`${s.message} ${s.myMessage}`} />
         } else {
@@ -19,12 +18,12 @@ const Dialog = ({state, dispatch}) => {
 
     const onMessageChange = (e) => {
         let text = e.target.value;
-        dispatch(onMessageChangeActionCreator(text));
+        props.onMessageChange(text);
     }
 
     const addMessage = () => {
-        dispatch(addMessageActionCreator());
-        dispatch(onMessageChangeActionCreator(''));
+        props.addMessage();
+        props.onMessageChange('');
     }
 
     return (
@@ -37,7 +36,7 @@ const Dialog = ({state, dispatch}) => {
                 {messageElements}
                 <div className={s.textareaWrapper}>
                     <textarea  type='text'
-                            value={state.dialogsPage.newMessageText}
+                            value={props.dialogsPage.newMessageText}
                             className={s.textarea} 
                             onChange={onMessageChange} 
                     ></textarea>

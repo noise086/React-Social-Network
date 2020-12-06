@@ -1,23 +1,18 @@
 import React from 'react';
-import { addPostActionCreator, onPostChangeActionCreator } from '../../../redux/profileReducer';
 import s from './myPosts.module.css';
 import Post from './post/post';
 
 
-
-
-
-const MyPosts = ({state, dispatch}) => {
-    const postsElements = state.profilePage.posts.map(p => <Post message={p.message} likescount={p.likescount} />);
+const MyPosts = (props) => {
+    const postsElements = props.profilePage.posts.map(p => <Post message={p.message} likescount={p.likescount} />);
 
     const addPosts = () => {
-        dispatch(addPostActionCreator());
-        dispatch(onPostChangeActionCreator(''));
+        props.addPosts()
     }
 
     const onPostChange = (e) => {
         let text = e.target.value;
-        dispatch(onPostChangeActionCreator(text))
+        props.onPostChange(text)
     }
     return (
         <div className={s.wrapper}>
@@ -26,7 +21,7 @@ const MyPosts = ({state, dispatch}) => {
                 <div className={s.input}>
                     <textarea 
                            type='text' 
-                           value={state.profilePage.newPostText}
+                           value={props.profilePage.newPostText}
                            placeholder='Как дела?' 
                            className={s.inputPost} 
                            onChange={onPostChange}

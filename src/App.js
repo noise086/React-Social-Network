@@ -3,12 +3,11 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/header/header';
 import Nav from './components/navBar/navBar';
-import Dialog from './components/profile/dialog/dialog';
+import DialogContainer from './components/profile/dialog/dialogContainer';
 import Profile from './components/profile/profile';
 
 
 function App({store, state}) {
-	
 	return (
 		<BrowserRouter>
 			<div className='appWrapper'>
@@ -18,12 +17,11 @@ function App({store, state}) {
 					<Route 
 						path="/profile" 
 						render={() => <Profile 
-							state={state}
-							dispatch={store.dispatch.bind(store)} />} >
+							store={store} state={state} />} >
 					</Route>
 					<Route 
 						path="/dialog" 
-						render={() => <Dialog
+						render={() => <DialogContainer
 							state={state}
 							dispatch={store.dispatch.bind(store)} />} >
 					</Route>
