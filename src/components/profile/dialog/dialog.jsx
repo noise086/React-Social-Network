@@ -6,6 +6,7 @@ import Message from "./message/message";
 
 
 const Dialog = (props) => {
+    // debugger
     const dialogElements = props.dialogsPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}  />)
 
     const messageElements = props.dialogsPage.messages.map(m => {
@@ -23,7 +24,6 @@ const Dialog = (props) => {
 
     const addMessage = () => {
         props.addMessage();
-        props.onMessageChange('');
     }
 
     return (
@@ -42,7 +42,7 @@ const Dialog = (props) => {
                     ></textarea>
                     <button 
                         className={s.button}
-                        onClick={addMessage} >sand</button>
+                        onClick={addMessage} >send</button>
                 </div>
             </div>
         </div>

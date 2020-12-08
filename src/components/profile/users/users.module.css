@@ -1,0 +1,37 @@
+
+
+.usersWrapper {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+
+.avaBtnWrapper {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.avatar {
+    width: 70px;
+} img{
+    width: 100%;
+}
+
+.infoWrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    height: 60%;
+    padding: 10px 10px;
+    border: rgb(75, 75, 255) 2px solid;
+    border-radius: 10px;
+
+}
+
+.location {
+    text-align: right;
+}
+
+.status, .city {
+    margin-top: 17px;
+}

@@ -42,7 +42,7 @@
 }
 .message {
     display: block;
-    width: fit-content;
+    width: 40%;
     margin: 10px 0;
     margin-right: 30px;
     padding: 10px 30px;

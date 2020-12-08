@@ -2,28 +2,30 @@ import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/header/header';
-import Nav from './components/navBar/navBar';
+import NavBarContainer from './components/navBar/navBarContainer';
 import DialogContainer from './components/profile/dialog/dialogContainer';
 import Profile from './components/profile/profile';
+import UsersContainer from './components/profile/users/usersContainer';
 
 
-function App({store, state}) {
+function App() {
 	return (
 		<BrowserRouter>
 			<div className='appWrapper'>
 				<Header />
-				<Nav friends={state.sideBar.friends} />
+				<NavBarContainer/>
 				<div className="appWrapperContent">
 					<Route 
 						path="/profile" 
-						render={() => <Profile 
-							store={store} state={state} />} >
+						render={() => <Profile />} >
 					</Route>
 					<Route 
 						path="/dialog" 
-						render={() => <DialogContainer
-							state={state}
-							dispatch={store.dispatch.bind(store)} />} >
+						render={() => <DialogContainer />} >
+					</Route>
+					<Route 
+						path="/users" 
+						render={() => <UsersContainer />} >
 					</Route>
 				</div>
 

@@ -15,31 +15,39 @@ let initialState = {
     ],
     messages: [
         { myMessage: false, message: "Hi" },
-        { myMessage: true, message: 'How arw you' },
-        { myMessage: false, message: 'Who is it' },
+        { myMessage: true, message: 'How are you' },
+        { myMessage: false, message: 'lorem cheta tam hui poimichexkiy text dlinnyy kak moya elda' },
         { myMessage: true, message: "Fuck you" },
         { myMessage: false, message: "Go drink" },
         { myMessage: true, message: "Ok" },
     ],
-newPostText: ''
+    newMessageText: 'message'
 };
 
 const dialogsReducer = (state = initialState, action) => {
+
     switch (action.type) {
-        case ADD_MESSAGE: 
+        case ADD_MESSAGE: {
             let newMessage = {
                 myMessage: true,
                 message: state.newMessageText
             }
-            state.messages.push(newMessage);
-            return state
-        case ON_MESSAGE_CHANGE:
-            state.newMessageText = action.text;
-            return state
+            return {
+                ...state, 
+                newMessageText: '',
+                messages: [...state.messages, {...newMessage}]
+            }
+        }
+        case ON_MESSAGE_CHANGE:{
+            return {
+                ...state,
+                newMessageText: action.text
+            }
+        }
         default: 
             return state
     }
-
+    
 }
 
 export default dialogsReducer;

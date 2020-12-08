@@ -1,16 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import FriendsList from './friendsList/friendsList';
 import s from './navBar.module.css';
 
-const Nav = ({friends}) => {
-
-	const friend = friends.map( f => {
-		return <div className={s.friend} > 
-					{f.name}
-					<img src={f.avatar} alt="avatar" />
-			   </div>
-	})
-
+const Nav = ({navBar}) => {
     return (
 		<nav className={s.nav}>
 			<div className={s.item}>
@@ -29,7 +22,7 @@ const Nav = ({friends}) => {
 				<a href="#">Settings</a>
 			</div>
 			<div className={s.friends}>
-				{friend}
+				<FriendsList navBar={navBar} />
 			</div>
 		</nav>
 

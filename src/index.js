@@ -4,21 +4,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { Provider } from 'react-redux';
 
 
-export const renderedEntiresTree = () => {
 	ReactDOM.render(
 		<React.StrictMode>
-			<App
-                store={store}
-                state={store.getState()}
-                 />
+			<Provider store={store}>
+				<App />
+			</Provider>
 		</React.StrictMode>,
 		document.getElementById('root')
 	);
-}
-
-renderedEntiresTree();
-
-store.subscribe(renderedEntiresTree);
-

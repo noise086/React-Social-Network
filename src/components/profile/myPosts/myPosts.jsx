@@ -4,10 +4,11 @@ import Post from './post/post';
 
 
 const MyPosts = (props) => {
+
     const postsElements = props.profilePage.posts.map(p => <Post message={p.message} likescount={p.likescount} />);
 
     const addPosts = () => {
-        props.addPosts()
+        props.addPost()
     }
 
     const onPostChange = (e) => {
