@@ -1,17 +1,19 @@
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
-const SET_USERS = 'SET-USERS'
+const SET_USERS = 'SET-USERS';
+const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE'
 
-export const followAC = (userId) => ({type: FOLLOW, userId })
-export const unfollowAC = (userId) => ({type: UNFOLLOW, userId })
-export const setUsersAC = (users) => ({type: SET_USERS, users })
+export const followAC = (userId) => ({ type: FOLLOW, userId })
+export const unfollowAC = (userId) => ({ type: UNFOLLOW, userId })
+export const setUsersAC = (users, totalCount) => ({ type: SET_USERS, users, totalCount })
+export const setCurrentPageAC = (pageId) => ({ type: SET_CURRENT_PAGE, pageId })
+
 
 let initialState = {
-    users: [
-        {id: 1, avatarUrl: 'https://tulatrud.ru/wp-content/uploads/modnye-avatarki-dlya-vk_3.jpg', name: 'Nikolay', followed: false, status: 'Im a learning React+Redux', location: {country: 'Russia', city: 'Ul\'yanovsk'}},
-        {id: 2, avatarUrl: 'https://tulatrud.ru/wp-content/uploads/modnye-avatarki-dlya-vk_3.jpg', name: 'John', followed: true, status: 'Chill at the island', location: {country: 'USA', city: 'Miami'}},
-        {id: 3, avatarUrl: 'https://tulatrud.ru/wp-content/uploads/modnye-avatarki-dlya-vk_3.jpg', name: 'Tod', followed: false, status: 'Im just man,  im just men', location: {country: 'Russia', city: 'Ulyanovsk'}}
-    ]
+    users: [],
+    totalCount: 0,
+    pageSize: 5,
+    currentPage: 2
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -21,34 +23,40 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 users: state.users.map(u => {
-                   if (u.id === action.userId) {
-                       return {...u, followed: true}
-                   }
-                   return u
+                    if (u.id === action.userId) {
+                        return { ...u, followed: true }
+                    }
+                    return u
                 })
             }
-            
+
         case 'UNFOLLOW':
             return {
                 ...state,
                 users: state.users.map(u => {
-                   if (u.id === action.userId) {
-                       return {...u, followed: false}
-                   }
-                   return u
+                    if (u.id === action.userId) {
+                        return { ...u, followed: false }
+                    }
+                    return u
                 })
             }
 
-            case 'SET-USERS':
+        case 'SET-USERS':
             return {
                 ...state,
-                users: [...state.users, ...action.users]
-                
+                users: [ ...action.users ],
+                totalCount: action.totalCount
+
             }
-        default: 
+        case 'SET-CURRENT-PAGE':
+            return {
+                ...state,
+                currentPage: action.pageId
+            }
+        default:
             return state
     }
-    
+
 }
 
 export default usersReducer;
