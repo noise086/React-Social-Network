@@ -7,13 +7,13 @@ import Message from "./message/message";
 
 const Dialog = (props) => {
     // debugger
-    const dialogElements = props.dialogsPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}  />)
+    const dialogElements = props.dialogsPage.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}  />)
 
     const messageElements = props.dialogsPage.messages.map(m => {
         if (m.myMessage) {
-            return <Message message={m.message} style={`${s.message} ${s.myMessage}`} />
+            return <Message key={m.id} message={m.message} style={`${s.message} ${s.myMessage}`} />
         } else {
-            return <Message message={m.message} style={`${s.message}`} />
+            return <Message key={m.id} message={m.message} style={`${s.message}`} />
         }
     })
 

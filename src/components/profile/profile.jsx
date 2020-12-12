@@ -6,13 +6,14 @@ import bg from './background.jpg'
 
 
 
-const Profile = () => {
+const Profile = (props) => {
+    // debugger 
     return (
         <div className={s.content}>
             <div className={s.profileImg}>
                 <img src={bg} alt='pic' />
             </div>
-            <ProfileInfo />
+            <ProfileInfo {...props} />
             <MyPostsContainer />
         </div>
     )

@@ -14,12 +14,12 @@ let initialState = {
         { id: 6, name: 'Elena' },
     ],
     messages: [
-        { myMessage: false, message: "Hi" },
-        { myMessage: true, message: 'How are you' },
-        { myMessage: false, message: 'lorem cheta tam hui poimichexkiy text dlinnyy kak moya elda' },
-        { myMessage: true, message: "Fuck you" },
-        { myMessage: false, message: "Go drink" },
-        { myMessage: true, message: "Ok" },
+        { id: 1, myMessage: false, message: "Hi" },
+        { id: 2, myMessage: true, message: 'How are you' },
+        { id: 3, myMessage: false, message: 'lorem cheta tam hui poimichexkiy text dlinnyy kak moya elda' },
+        { id: 4, myMessage: true, message: "Fuck you" },
+        { id: 5, myMessage: false, message: "Go drink" },
+        { id: 6, myMessage: true, message: "Ok" },
     ],
     newMessageText: 'message'
 };
@@ -29,6 +29,7 @@ const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_MESSAGE: {
             let newMessage = {
+                id: state.messages.length + 1,
                 myMessage: true,
                 message: state.newMessageText
             }

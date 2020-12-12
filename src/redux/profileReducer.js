@@ -1,8 +1,10 @@
 const ADD_POST = 'ADD-POST';
 const ON_POST_CHANGE = 'ON-POST-CHANGE';
+const SET_PROFILE = 'SET-PROFILE';
 
 export const addPostActionCreator = () => ({ type: ADD_POST })
 export const onPostChangeActionCreator = (text) => ({ type: ON_POST_CHANGE, text: text })
+export const setProfile = (profile) => ({ type: SET_PROFILE, profile })
 
 let initialState = {
     posts: [
@@ -11,7 +13,8 @@ let initialState = {
         { id: 3, message: 'Its my second post', likescount: 13 },
         { id: 4, message: 'Its my first post', likescount: 23 },
     ],
-    newPostText: ''
+    newPostText: '',
+    profile: null
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -19,7 +22,7 @@ const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST: {
             let newPost = {
-                id: 5,
+                id: state.posts.length + 1,
                 message: state.newPostText,
                 likescount: 0
             }
@@ -35,10 +38,14 @@ const profileReducer = (state = initialState, action) => {
                 newPostText: action.text
             }
         }
+        case SET_PROFILE: {
+            return {
+                ...state, profile: action.profile
+            }
+        }
         default:
             return state
     }
-
 }
-
+// debugger
 export default profileReducer;

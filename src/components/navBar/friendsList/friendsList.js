@@ -3,7 +3,7 @@ import s from '../navBar.module.css';
 
 const FriendsList = ({navBar}) => {
 	const friend = navBar.friends.map( f => {
-		return <div className={s.friend} > 
+		return <div key={f.id} className={s.friend} > 
 					{f.name}
 					<img src={f.avatar} alt="avatar" />
 				</div>

@@ -4,7 +4,7 @@ import './App.css';
 import Header from './components/header/header';
 import NavBarContainer from './components/navBar/navBarContainer';
 import DialogContainer from './components/profile/dialog/dialogContainer';
-import Profile from './components/profile/profile';
+import ProfileContainer from './components/profile/profileContainer';
 import UsersContainer from './components/profile/users/usersContainer';
 
 
@@ -17,7 +17,7 @@ function App() {
 				<div className="appWrapperContent">
 					<Route 
 						path="/profile" 
-						render={() => <Profile />} >
+						render={() => <ProfileContainer />} >
 					</Route>
 					<Route 
 						path="/dialog" 
