@@ -1,24 +1,32 @@
 import React from 'react';
 import Preloader from '../../common/preloader/preloader';
 import s from './profileInfo.module.css';
+import unknownUser from '../users/unknownUser.jpg'
+import ProfileStatus from './profileStatus';
 
 const ProfileInfo = (props) => {
-    // debugger
     if (!props.profile) {
         return <Preloader />
     } else {
         return (
             <div className={s.profileInfo}>
-                <div className={s.avatar}>
-                    <img src={props.profile.photos.large} alt='avatar'></img>
+
+                <div className={s.mainInfo} >
+                    <div className={s.avatar}>
+                        <img src={props.profile.data.photos.large ? props.profile.data.photos.large : unknownUser} alt='avatar'></img>
+                    </div>
+                    <div className={s.nameStatus} >
+                        <div> {props.profile.data.fullName} </div>
+                        <div className={s.status} ><ProfileStatus {...props} /></div>
+                    </div>
                 </div>
-                <div className={s.description}>
-                    description
-                </div>
+                <div className={s.description}>{props.profile.aboutMe} </div>
+
+
             </div>
         )
     }
-    
+
 }
 
 export default ProfileInfo;

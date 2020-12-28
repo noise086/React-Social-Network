@@ -1,0 +1,16 @@
+
+
+
+
+.follow, .unfollow {
+    width: 70px;
+    height: 25px;
+    border-radius: 5px;
+    border: rgb(75, 75, 255) 1px solid;
+    color: rgb(75, 75, 255) ;
+    font-weight: bold;
+}
+.follow {
+    background: rgb(75, 75, 255);
+    color: white;
+}

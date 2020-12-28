@@ -7,7 +7,6 @@ import bg from './background.jpg'
 
 
 const Profile = (props) => {
-    // debugger 
     return (
         <div className={s.content}>
             <div className={s.profileImg}>

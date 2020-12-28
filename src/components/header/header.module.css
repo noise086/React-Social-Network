@@ -10,3 +10,15 @@
     width: 20px;
     text-align : left;
 }
+
+.login {
+    float: right;
+}
+.login a {
+    color: white;
+    text-decoration: none;
+}
+.loginImg {
+     width: 15px;
+     text-align: right;
+}

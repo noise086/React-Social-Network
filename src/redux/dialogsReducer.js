@@ -1,8 +1,6 @@
 const ADD_MESSAGE = 'ADD-MESSAGE';
-const ON_MESSAGE_CHANGE = 'ON-MESSAGE-CHANGE';
 
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE})
-export const onMessageChangeActionCreator = (text) => ({type: ON_MESSAGE_CHANGE, text: text})
+export const addMessage = (text) => ({type: ADD_MESSAGE, text})
 
 let initialState = {
     dialogs: [
@@ -21,7 +19,6 @@ let initialState = {
         { id: 5, myMessage: false, message: "Go drink" },
         { id: 6, myMessage: true, message: "Ok" },
     ],
-    newMessageText: 'message'
 };
 
 const dialogsReducer = (state = initialState, action) => {
@@ -31,18 +28,11 @@ const dialogsReducer = (state = initialState, action) => {
             let newMessage = {
                 id: state.messages.length + 1,
                 myMessage: true,
-                message: state.newMessageText
+                message: action.text
             }
-            return {
-                ...state, 
-                newMessageText: '',
-                messages: [...state.messages, {...newMessage}]
-            }
-        }
-        case ON_MESSAGE_CHANGE:{
             return {
                 ...state,
-                newMessageText: action.text
+                messages: [...state.messages, {...newMessage}]
             }
         }
         default: 

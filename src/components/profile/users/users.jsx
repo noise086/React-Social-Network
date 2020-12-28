@@ -3,11 +3,10 @@ import s from './users.module.css'
 import unknownUser from './unknownUser.jpg'
 import Preloader from '../../common/preloader/preloader';
 import { NavLink } from 'react-router-dom';
+import ToggleFollow from '../../common/buttonFollow/toggleFollow';
 
 
 const Users = (props) => {
-
-    let pagesCount = Math.ceil(props.totalCount / props.pageSize);
     let start;
     props.currentPage < 5 ? start = 1 : start = props.currentPage - 4;
     let pages = [];
@@ -30,16 +29,15 @@ const Users = (props) => {
                 <div key={u.id} className={s.usersWrapper}>
                     <div className={s.avaBtnWrapper}>
                         <div className={s.avatar}>
-                            <NavLink to="/profile/2" >
+                            <NavLink to={`profile/${u.id}`} >
                                 <img src={u.photos.small ? u.photos.small : unknownUser} alt="avatar" />
                             </NavLink>
-                            {u.followed ?
-                                <button
-                                    className={s.unfollow}
-                                    onClick={() => props.onUnfollow(u.id)} >Unfollow</button> :
-                                <button
-                                    className={s.follow}
-                                    onClick={() => props.onFollow(u.id)} >Follow</button>}
+                            <ToggleFollow 
+                                followed={u.followed} 
+                                id={u.id} 
+                                followingInProgress={props.followingInProgress}
+                                setToggleUnFollow={props.setToggleUnFollow}
+                                setToggleFollow={props.setToggleFollow} />
                         </div>
                     </div>
                     <div className={s.infoWrapper}>

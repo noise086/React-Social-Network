@@ -1,13 +1,16 @@
 import React from 'react';
+import { reduxForm } from 'redux-form';
 import s from './dialog.module.css';
+import { DialogsForm } from './dialogForm/dialogForm';
 import DialogItem from './dialogItem/dialogItem';
 import Message from "./message/message";
 
 
 
+
 const Dialog = (props) => {
-    // debugger
-    const dialogElements = props.dialogsPage.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}  />)
+    
+    const dialogElements = props.dialogsPage.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id} />)
 
     const messageElements = props.dialogsPage.messages.map(m => {
         if (m.myMessage) {
@@ -17,13 +20,10 @@ const Dialog = (props) => {
         }
     })
 
-    const onMessageChange = (e) => {
-        let text = e.target.value;
-        props.onMessageChange(text);
-    }
 
-    const addMessage = () => {
-        props.addMessage();
+    const addMessage = (values) => {
+        props.addMessage(values.textarea);
+        values.textarea = ''
     }
 
     return (
@@ -34,19 +34,12 @@ const Dialog = (props) => {
             </div>
             <div className={s.messages}>
                 {messageElements}
-                <div className={s.textareaWrapper}>
-                    <textarea  type='text'
-                            value={props.dialogsPage.newMessageText}
-                            className={s.textarea} 
-                            onChange={onMessageChange} 
-                    ></textarea>
-                    <button 
-                        className={s.button}
-                        onClick={addMessage} >send</button>
-                </div>
+                <DialogsFormRedux onSubmit={addMessage} />
             </div>
         </div>
     )
 }
+
+const DialogsFormRedux = reduxForm({ form: 'Dialogs' })(DialogsForm)
 
 export default Dialog;

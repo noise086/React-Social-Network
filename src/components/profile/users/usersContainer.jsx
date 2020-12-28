@@ -1,26 +1,17 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { onFollow, setUsers, onUnfollow, setCurrentPage, togglePreloader } from '../../../redux/usersReducer';
+import { compose } from 'redux';
+import { getUsersTC, setCurrentPage, setToggleFollow, setToggleUnFollow } from '../../../redux/usersReducer';
+import { stateCurrentPage, stateFollowingInProgress, stateIsLoaded, statePageSize, stateTotalCount, stateUsers } from '../../../redux/usersSelectors';
 import Users from './users';
 
-class UsersContainerAPI extends Component {
+class UsersContainer extends Component {
     componentDidMount() {
-        this.props.togglePreloader(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(res => {
-                this.props.setUsers(res.data.items, res.data.totalCount);
-                this.props.togglePreloader(false)
-            })
+        this.props.getUsersTC(this.props.currentPage, this.props.pageSize);
     }
-    onSetCurrentPage = (p) => {
-        this.props.setCurrentPage(p)
-        this.props.togglePreloader(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`)
-            .then(res => {
-                this.props.setUsers(res.data.items, res.data.totalCount);
-                this.props.togglePreloader(false)
-            })
+    onSetCurrentPage = (currentPage) => {
+        this.props.setCurrentPage(currentPage)
+        this.props.getUsersTC(currentPage, this.props.pageSize);
     }
     render() {
         return <Users 
@@ -30,30 +21,31 @@ class UsersContainerAPI extends Component {
                     currentPage={this.props.currentPage}
                     isLoaded={this.props.isLoaded}
                     onSetCurrentPage={this.onSetCurrentPage}
-                    onFollow={this.props.onFollow}
-                    onUnfollow={this.props.onUnfollow} />
+                    followingInProgress={this.props.followingInProgress}
+                    setToggleUnFollow={this.props.setToggleUnFollow}
+                    setToggleFollow={this.props.setToggleFollow} />
     }
 }
 
 
 let mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
-        totalCount: state.usersPage.totalCount,
-        pageSize: state.usersPage.pageSize,
-        currentPage: state.usersPage.currentPage,
-        isLoaded: state.usersPage.isLoaded
+        users: stateUsers(state),
+        totalCount: stateTotalCount(state),
+        pageSize: statePageSize(state),
+        currentPage: stateCurrentPage(state),
+        isLoaded: stateIsLoaded(state),
+        followingInProgress: stateFollowingInProgress(state),
+        // isAuth: state.auth.isAuth
+
     }
 }           
 
-
-
-const UsersContainer = connect(mapStateToProps, {
-    onFollow,
-    onUnfollow,
-    setUsers,
-    setCurrentPage,
-    togglePreloader
-}) (UsersContainerAPI);
-
-export default UsersContainer;
+export default compose(
+    connect(mapStateToProps, {
+        setCurrentPage,
+        getUsersTC,
+        setToggleUnFollow,
+        setToggleFollow
+    })
+)(UsersContainer)
