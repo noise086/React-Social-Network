@@ -2,6 +2,10 @@ export const stateUsers = (state) => {
     return state.usersPage.users
 }
 
+export const stateUsersSuper = (stateUsers, (users) => {
+    return users.filter(u => true)
+})
+
 export const stateTotalCount = (state) => {
     return state.usersPage.totalCount
 }

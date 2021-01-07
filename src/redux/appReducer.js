@@ -1,8 +1,8 @@
 import { setLogin } from "./authReducer";
 
-const INITIALIZED_SUCCESS = 'INITIALIZED-SUCCESS';
+const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
 
-export const initializedSuccess = () => ({ type: INITIALIZED_SUCCESS, initialized: true})
+export const initializedSuccess = () => ({ type: INITIALIZED_SUCCESS})
 
 
 let initialState = {
@@ -12,7 +12,7 @@ let initialState = {
 const appReducer = (state = initialState, action) => {
     // debugger
     switch (action.type) {
-        case 'INITIALIZED-SUCCESS':
+        case 'INITIALIZED_SUCCESS':
             return {
                 ...state,
                 initialized: true
@@ -23,13 +23,9 @@ const appReducer = (state = initialState, action) => {
 
 }
 
-export const initializeApp = () => (dispatch) => {
-    let promise = dispatch(setLogin());
-    Promise.all([promise]).then(() => {
-        dispatch(initializedSuccess());
-    })
-
-  
+export const initializeApp = () => async (dispatch) => {
+    await dispatch(setLogin());
+    dispatch(initializedSuccess());
 }
 
 export default appReducer;

@@ -1,0 +1,33 @@
+.paginatorWrapper{
+    display: flex;
+    align-items: center;
+}
+/* .pages {
+    width: 30px;
+    height: 25px;
+} */
+.page {
+
+    cursor: pointer;
+    /* border: black 1px solid; */
+    /* border-radius: 5px; */
+    padding: 1px 5px;
+    margin: 5px;
+}
+.currentPage {
+    font-weight: bold;
+    border: black 1px solid;
+    /* border-radius: 5px; */
+    padding: 1px 5px;
+    margin: 5px;
+}
+
+.button{
+    /* border: black 1px solid; */
+    border-radius: 5px;
+    font-size: 20px;
+    background: rgb(75, 75, 255);
+    color: white;
+    margin: 0 5px;
+    cursor: pointer;
+}

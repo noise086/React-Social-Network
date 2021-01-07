@@ -5,6 +5,7 @@ import { setProfileTC, setStatusTC, updateStatusTC } from '../../redux/profileRe
 import { WithAuthRedirect } from '../hoc/withAuthRedirect';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
+import { stateProfile, stateStatus, stateIsAuth, stateAuthorizedId } from '../../redux/profileSelectors';
 
 
 class ProfileContainer extends Component {
@@ -28,10 +29,10 @@ class ProfileContainer extends Component {
 }
 // debugger
 let mapStateToProps = (state) => ({
-    profile: state.profilePage.profile,
-    status: state.profilePage.status,
-    isAuth: state.auth.isAuth,
-    authorizedId: state.auth.id
+    profile: stateProfile(state),
+    status: stateStatus(state),
+    isAuth: stateIsAuth(state),
+    authorizedId: stateAuthorizedId(state)
 })
 
 export default compose(

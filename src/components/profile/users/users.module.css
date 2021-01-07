@@ -54,3 +54,11 @@
 .currentPage {
     font-weight: bold;
 }
+
+.searchWrapper {
+    display: flex;
+}
+
+.button {
+    display: inline-block;
+}

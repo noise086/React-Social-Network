@@ -1,64 +1,51 @@
-import React from 'react'
+import React, { useState } from 'react'
 import s from './users.module.css'
-import unknownUser from './unknownUser.jpg'
 import Preloader from '../../common/preloader/preloader';
-import { NavLink } from 'react-router-dom';
-import ToggleFollow from '../../common/buttonFollow/toggleFollow';
+import Paginator from '../../common/paginator/paginator';
+import User from './user';
 
+const Users = ({ followingInProgress, setToggleUnFollow, setToggleFollow, ...props }) => {
 
-const Users = (props) => {
-    let start;
-    props.currentPage < 5 ? start = 1 : start = props.currentPage - 4;
-    let pages = [];
-
-    for (let i = start; i <= start + 8; i++) {
-
-        pages.push(i)
+    const [filter, setFilter] = useState('')
+    let users = props.users
+    const changeFilter = (e) => {
+        let value = e.target.value
+        setFilter(value);
     }
-    return <div>
+    let filteredUsers = users.filter(u => u.name.indexOf(filter) > -1)
 
+    return (
+    <div>
+        <Paginator 
+            currentPage={props.currentPage} 
+            onSetCurrentPage={props.onSetCurrentPage}
+            totalCount={props.totalCount}
+            pageSize={props.pageSize} />
         <div>
-            {
-                pages.map((p) => {
-                    return <span key={p} onClick={() => props.onSetCurrentPage(p)} className={props.currentPage === p ? s.currentPage : s.pages} > {p}</span>
-                })
+            <div className={s.searchWrapper} >
+                <div className={s.input}>
+                    <input type="text" value={filter} onChange={changeFilter} />
+                </div>
+                <div className={s.button} >
+                    <button>Drop</button>
+                </div>
+            </div>
+        </div>
+        <div>
+            {(props.isLoaded) 
+            ? <Preloader /> 
+            : filteredUsers.map(u => { return <User
+                    key={u.id}
+                    user={u}
+                    followingInProgress={followingInProgress}
+                    setToggleUnFollow={setToggleUnFollow}
+                    setToggleFollow={setToggleFollow}
+                />
+            })
             }
         </div>
-        <div> {(props.isLoaded) ? <Preloader /> : props.users.map(u => {
-            return (
-                <div key={u.id} className={s.usersWrapper}>
-                    <div className={s.avaBtnWrapper}>
-                        <div className={s.avatar}>
-                            <NavLink to={`profile/${u.id}`} >
-                                <img src={u.photos.small ? u.photos.small : unknownUser} alt="avatar" />
-                            </NavLink>
-                            <ToggleFollow 
-                                followed={u.followed} 
-                                id={u.id} 
-                                followingInProgress={props.followingInProgress}
-                                setToggleUnFollow={props.setToggleUnFollow}
-                                setToggleFollow={props.setToggleFollow} />
-                        </div>
-                    </div>
-                    <div className={s.infoWrapper}>
-                        <div className={s.nameStatus}>
-                            <div className="name">{u.name}</div>
-                            <div className={s.status}>{u.status}</div>
-                        </div>
-                        <div className={s.location}>
-                            <div className={s.country}>{'u.location.country'}</div>
-                            <div className={s.city}>{'u.location.city'}</div>
-                        </div>
-                    </div>
-                </div>
-            )
-        })
-        } </div>
-        {
-
-        }
-
     </div>
+    )
 }
 
 export default Users;

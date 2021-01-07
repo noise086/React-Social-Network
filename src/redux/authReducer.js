@@ -38,27 +38,22 @@ const authReducer = (state = initialState, action) => {
 
 }
 
-export const setLogin = () => (dispatch) => {
-    return authAPI.me()
-        .then(data => {
-            if (data.data.resultCode === 0) {
-                let { id, login, email } = data.data.data
-                dispatch(setUserLogin(id, login, email, true));
-                usersAPI.getProfile(id)
-                .then(data => {
-                    let fullName = data.data.fullName
-                    let photo = data.data.photos.large
-                    dispatch(setCurrentUser(fullName, photo))
-                })
-                
-            }
-        })
+export const setLogin = () => async (dispatch) => {
+    let data = await authAPI.me()
+    if (data.data.resultCode === 0) {
+        let { id, login, email } = data.data.data
+        dispatch(setUserLogin(id, login, email, true));
+        let res = await usersAPI.getProfile(id)
+        let fullName = res.data.fullName
+        let photo = res.data.photos.large
+        dispatch(setCurrentUser(fullName, photo))
+
+    }
 }
 
-export const login = (email, password, rememberMe) => (dispatch) => {
+export const login = (email, password, rememberMe) => async (dispatch) => {
 
-    authAPI.signIn(email, password, rememberMe)
-        .then(data => {
+    let data = await authAPI.signIn(email, password, rememberMe)
             console.log(data);
             if (data.data.resultCode === 0) {
                 dispatch(setLogin());
@@ -66,16 +61,13 @@ export const login = (email, password, rememberMe) => (dispatch) => {
                 let message = data.data.messages.length > 0 ? data.data.messages[0] : 'Something wrong';
                 dispatch(stopSubmit('login', { _error: message }));
             }
-        })
 }
 
-export const logout = () => (dispatch) => {
-    authAPI.signOut()
-        .then(data => {
+export const logout = () => async (dispatch) => {
+    let data = await authAPI.signOut()
             if (data.data.resultCode === 0) {
                 dispatch(setUserLogin(null, null, null, false))
             }
-        })
 }
 
 export default authReducer;

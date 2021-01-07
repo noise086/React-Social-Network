@@ -6,8 +6,10 @@ import { stateCurrentPage, stateFollowingInProgress, stateIsLoaded, statePageSiz
 import Users from './users';
 
 class UsersContainer extends Component {
+   
     componentDidMount() {
-        this.props.getUsersTC(this.props.currentPage, this.props.pageSize);
+        const {currentPage, pageSize} = this.props
+        this.props.getUsersTC(currentPage, pageSize);
     }
     onSetCurrentPage = (currentPage) => {
         this.props.setCurrentPage(currentPage)
